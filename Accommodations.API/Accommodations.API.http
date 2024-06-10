@@ -1,0 +1,6 @@
+@Accommodations_API_HostAddress = https://localhost:7257
+
+
+GET {{Accommodations_API_HostAddress}}/api/healthcheck
+
+###
