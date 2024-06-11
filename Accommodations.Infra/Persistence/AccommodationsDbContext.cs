@@ -12,5 +12,21 @@ namespace Accommodations.Infra.Persistence
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AccommodationsDb;Trusted_Connection=True;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Accommodation>()
+                .OwnsOne(r => r.Address);
+
+            modelBuilder.Entity<Unit>()
+                .OwnsOne(r => r.Address);
+
+            modelBuilder.Entity<Accommodation>()
+                .HasMany(r => r.Units)
+                .WithOne()
+                .HasForeignKey(d => d.AccommodationId);
+        }
     }
 }
