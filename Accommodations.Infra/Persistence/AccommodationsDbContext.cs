@@ -3,7 +3,7 @@ using Accommodations.Domain.Entities;
 
 namespace Accommodations.Infra.Persistence
 {
-    internal class AccommodationsDbContext : DbContext
+    internal class AccommodationsDbContext(DbContextOptions<AccommodationsDbContext> options) : DbContext(options)
     {
         internal DbSet<Accommodation> Accommodations { get; set; }
         internal DbSet<Unit> Units { get; set; }
