@@ -47,6 +47,11 @@ namespace Accommodations.Domain.Entities
         public Address? Address { get; set; } // Each Unit can have its own Address
 
         /// <summary>
+        /// Gets or sets the availability of the unit
+        /// </summary>
+        public bool IsAvailable { get; set; } = true;
+
+        /// <summary>
         /// Gets or sets the unique identifier of the accommodation that the unit belongs to.
         /// </summary>
         public Guid AccommodationId { get; set; }

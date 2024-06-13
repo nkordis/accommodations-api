@@ -55,7 +55,8 @@ namespace Accommodations.Infra.Seeders
                                 City = "Copenhagen",
                                 Street = "123 Main Street",
                                 PostalCode = "1000"
-                            }
+                            },
+                            IsAvailable = true,
                         }
                     }
                 },
@@ -90,7 +91,8 @@ namespace Accommodations.Infra.Seeders
                                 City = "Aarhus",
                                 Street = "456 Country Road",
                                 PostalCode = "8000"
-                            }
+                            },
+                            IsAvailable = true,
                         }
                     }
                 }
