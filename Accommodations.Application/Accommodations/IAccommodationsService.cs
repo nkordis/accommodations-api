@@ -1,10 +1,10 @@
-﻿using Accommodations.Domain.Entities;
+﻿using Accommodations.App.Accommodations.Dtos;
 
 namespace Accommodations.App.Accommodations
 {
     public interface IAccommodationsService
     {
-        Task<Accommodation?> GetAccommodation(Guid guid);
-        Task<IEnumerable<Accommodation>> GetAllAccommodations();
+        Task<AccommodationDto?> GetAccommodation(Guid guid);
+        Task<IEnumerable<AccommodationDto>> GetAllAccommodations();
     }
 }
