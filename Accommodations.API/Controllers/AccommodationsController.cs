@@ -13,5 +13,15 @@ namespace Accommodations.API.Controllers
             var accommodations = await accommodationsService.GetAllAccommodations();
             return Ok(accommodations);
         }
+
+        [HttpGet("{guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid guid)
+        {
+            var accommodation = await accommodationsService.GetAccommodation(guid);
+            if (accommodation is null)
+                return NotFound("The requested Id is not found");
+
+            return Ok(accommodation);
+        }
     }
 }

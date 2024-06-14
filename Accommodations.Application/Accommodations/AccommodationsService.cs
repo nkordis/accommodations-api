@@ -13,5 +13,12 @@ namespace Accommodations.App.Accommodations
             var accommodations = await accommodationsRepository.GetAllAsync();
             return accommodations;
         }
+
+        public async Task<Accommodation?> GetAccommodation(Guid guid)
+        {
+            logger.LogInformation($"Getting accommodation with guid: {guid}");
+            var accommodation = await accommodationsRepository.GetAsync(guid);
+            return accommodation;
+        }
     }
 }

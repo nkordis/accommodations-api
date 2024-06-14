@@ -8,3 +8,5 @@ GET {{Accommodations_API_HostAddress}}/api/healthcheck
 GET {{Accommodations_API_HostAddress}}/api/accommodations
 
 ###
+
+GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba1-df8cfbab82f0

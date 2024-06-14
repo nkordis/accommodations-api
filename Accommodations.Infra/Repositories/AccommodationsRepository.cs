@@ -12,5 +12,11 @@ namespace Accommodations.Infra.Repositories
             var accommodations = await _dbContext.Accommodations.ToListAsync();
             return accommodations;
         }
+
+        public async Task<Accommodation?> GetAsync(Guid guid)
+        {
+            var accommodation = await _dbContext.Accommodations.FirstOrDefaultAsync(a => a.Id == guid);
+            return accommodation;
+        }
     }
 }
