@@ -1,3 +1,4 @@
+using Accommodations.App.Extensions;
 using Accommodations.Infra.Extensions;
 using Accommodations.Infra.Seeders;
 
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-
+builder.Services.AddApplication();
 builder.Services.AddDbInfrastructure(builder.Configuration);
 
 var app = builder.Build();

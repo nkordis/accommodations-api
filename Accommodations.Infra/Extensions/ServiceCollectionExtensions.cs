@@ -1,4 +1,6 @@
-﻿using Accommodations.Infra.Persistence;
+﻿using Accommodations.Domain.Repositories;
+using Accommodations.Infra.Persistence;
+using Accommodations.Infra.Repositories;
 using Accommodations.Infra.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,7 @@ namespace Accommodations.Infra.Extensions
             services.AddDbContext<AccommodationsDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IAccommodationSeeder, AccommodationSeeder>();
+            services.AddScoped<IAccommodationsRepository, AccommodationsRepository>();
         }
     }
 }
