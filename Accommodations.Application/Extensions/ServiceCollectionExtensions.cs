@@ -8,6 +8,8 @@ namespace Accommodations.App.Extensions
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IAccommodationsService, AccommodationsService>();
+
+            services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
         }
     }
 }

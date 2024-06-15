@@ -14,29 +14,5 @@ namespace Accommodations.App.Accommodations.Dtos
         public string? Street { get; set; }
         public string? PostalCode { get; set; }
         public List<UnitDto> Units { get; set; } = [];
-
-        // <summary>
-        /// Maps an Accommodation entity to an AccommodationDto.
-        /// </summary>
-        /// <param name="accommodation">The Accommodation entity.</param>
-        /// <returns>An AccommodationDto.</returns>
-        public static AccommodationDto? FromEntity(Accommodation? accommodation)
-        {
-            if (accommodation == null)
-                return null;
-
-            return new AccommodationDto()
-            {
-                Id = accommodation.Id,
-                Name = accommodation.Name,
-                Description = accommodation.Description,
-                Type = accommodation.Type.ToString(),
-                HasInstantBooking = accommodation.HasInstantBooking,
-                City = accommodation.Address.City,
-                Street = accommodation.Address.Street,
-                PostalCode = accommodation.Address.PostalCode,
-                Units = accommodation.Units.Select(UnitDto.FromEntity).ToList(),
-            };
-        }
     }
 }
