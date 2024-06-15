@@ -13,7 +13,7 @@ namespace Accommodations.App.Accommodations.Dtos
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? PostalCode { get; set; }
-        public List<UnitDto> Units { get; set; } = new();
+        public List<UnitDto> Units { get; set; } = [];
 
         // <summary>
         /// Maps an Accommodation entity to an AccommodationDto.
@@ -35,6 +35,7 @@ namespace Accommodations.App.Accommodations.Dtos
                 City = accommodation.Address.City,
                 Street = accommodation.Address.Street,
                 PostalCode = accommodation.Address.PostalCode,
+                Units = accommodation.Units.Select(UnitDto.FromEntity).ToList(),
             };
         }
     }

@@ -15,7 +15,9 @@ namespace Accommodations.Infra.Repositories
 
         public async Task<Accommodation?> GetAsync(Guid guid)
         {
-            var accommodation = await _dbContext.Accommodations.FirstOrDefaultAsync(a => a.Id == guid);
+            var accommodation = await _dbContext.Accommodations
+                .Include(a => a.Units)
+                .FirstOrDefaultAsync(a => a.Id == guid);
             return accommodation;
         }
     }
