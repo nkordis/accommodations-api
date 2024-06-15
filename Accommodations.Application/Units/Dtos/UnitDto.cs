@@ -8,9 +8,9 @@ namespace Accommodations.App.Units.Dtos
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
         public decimal Price { get; set; }
-        public string BillingPeriod { get; set; } = default!;
+        public BillingPeriod BillingPeriod { get; set; } = default!;
         public int Capacity { get; set; }
-        public string Type { get; set; } = default!;
+        public UnitType Type { get; set; } = default!;
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? PostalCode { get; set; }
