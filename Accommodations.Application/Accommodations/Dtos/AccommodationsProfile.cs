@@ -7,6 +7,14 @@ namespace Accommodations.App.Accommodations.Dtos
     {
         public AccommodationsProfile()
         {
+            CreateMap<CreateAccommodationDto, Accommodation>()
+                .ForMember(d => d.Address, opt => opt.MapFrom(src => new Address()
+                {
+                    City = src.City,
+                    Street = src.Street,
+                    PostalCode = src.PostalCode,
+                }));
+
             CreateMap<Accommodation, AccommodationDto>()
                 .ForMember(d => d.City, opt => opt.MapFrom(src => src.Address.City))
                 .ForMember(d => d.Street, opt => opt.MapFrom(src => src.Address.Street))

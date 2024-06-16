@@ -1,4 +1,5 @@
 ﻿using Accommodations.App.Accommodations;
+using Accommodations.App.Accommodations.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Accommodations.API.Controllers
@@ -15,13 +16,21 @@ namespace Accommodations.API.Controllers
         }
 
         [HttpGet("{guid}")]
-        public async Task<IActionResult> Get([FromRoute] Guid guid)
+        public async Task<IActionResult> GetByGuid([FromRoute] Guid guid)
         {
             var accommodation = await accommodationsService.GetAccommodation(guid);
             if (accommodation is null)
                 return NotFound("The requested Id is not found");
 
             return Ok(accommodation);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAccommodation([FromBody]CreateAccommodationDto createAccommodationDto)
+        {
+            Guid guid = await accommodationsService.Create(createAccommodationDto);
+
+            return CreatedAtAction(nameof(GetByGuid), new {guid}, null);
         }
     }
 }

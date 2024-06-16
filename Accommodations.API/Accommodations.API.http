@@ -9,4 +9,21 @@ GET {{Accommodations_API_HostAddress}}/api/accommodations
 
 ###
 
-GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba1-df8cfbab82f0
+GET {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c
+
+###
+
+POST {{Accommodations_API_HostAddress}}/api/accommodations
+Content-Type: application/json
+
+{
+  "name": "Sunny Villa",
+  "description": "Spacious villa with a beautiful view.",
+  "type": "Resort",
+  "hasInstantBooking": false,
+  "contactEmail": "contact@sunnyvilla.com",
+  "contactNumber": "+987654321",
+  "city": "Copenhagen",
+  "street": "789 Beach Avenue",
+  "postalCode": "2100"
+}

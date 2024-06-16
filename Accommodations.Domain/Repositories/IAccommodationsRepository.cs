@@ -6,5 +6,6 @@ namespace Accommodations.Domain.Repositories
     {
         Task<IEnumerable<Accommodation>> GetAllAsync();
         Task<Accommodation?> GetAsync(Guid guid);
+        Task<Guid> Create(Accommodation entity);
     }
 }

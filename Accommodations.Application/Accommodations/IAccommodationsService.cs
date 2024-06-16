@@ -6,5 +6,6 @@ namespace Accommodations.App.Accommodations
     {
         Task<AccommodationDto?> GetAccommodation(Guid guid);
         Task<IEnumerable<AccommodationDto>> GetAllAccommodations();
+        Task<Guid> Create(CreateAccommodationDto dto);
     }
 }

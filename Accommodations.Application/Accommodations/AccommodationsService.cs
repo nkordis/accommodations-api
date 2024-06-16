@@ -1,4 +1,5 @@
 ﻿using Accommodations.App.Accommodations.Dtos;
+using Accommodations.Domain.Entities;
 using Accommodations.Domain.Repositories;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,15 @@ namespace Accommodations.App.Accommodations
             var accommodationdto = mapper.Map<AccommodationDto?>(accommodation);
 
             return accommodationdto;
+        }
+
+        public async Task<Guid> Create(CreateAccommodationDto dto)
+        {
+            logger.LogInformation("Creating a new accommodation");
+            var accommodation = mapper.Map<Accommodation>(dto);
+            Guid guid = await accommodationsRepository.Create(accommodation);
+
+            return guid;
         }
     }
 }
