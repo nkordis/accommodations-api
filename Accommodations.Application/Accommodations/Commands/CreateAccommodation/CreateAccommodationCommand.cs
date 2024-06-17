@@ -1,8 +1,8 @@
-﻿using Accommodations.Domain.Entities;
+﻿using MediatR;
 
-namespace Accommodations.App.Accommodations.Dtos
+namespace Accommodations.App.Accommodations.Commands.CreateAccommodation
 {
-    public class CreateAccommodationDto
+    public class CreateAccommodationCommand : IRequest<Guid>
     {
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;

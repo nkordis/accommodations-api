@@ -1,4 +1,5 @@
-﻿using Accommodations.Domain.Entities;
+﻿using Accommodations.App.Accommodations.Commands.CreateAccommodation;
+using Accommodations.Domain.Entities;
 using AutoMapper;
 
 namespace Accommodations.App.Accommodations.Dtos
@@ -7,7 +8,7 @@ namespace Accommodations.App.Accommodations.Dtos
     {
         public AccommodationsProfile()
         {
-            CreateMap<CreateAccommodationDto, Accommodation>()
+            CreateMap<CreateAccommodationCommand, Accommodation>()
                 .ForMember(d => d.Type, opt => opt.MapFrom(src => Enum.Parse<AccommodationType>(src.Type, true)))
                 .ForMember(d => d.Address, opt => opt.MapFrom(src => new Address()
                 {

@@ -17,13 +17,13 @@ POST {{Accommodations_API_HostAddress}}/api/accommodations
 Content-Type: application/json
 
 {
-  "name": "Cozy Cabin",
-  "description": "A quaint cabin nestled in the woods.",
-  "type": "BedAndBreakfast",
-  "hasInstantBooking": true,
-  "contactEmail": "info@cozycabin.com",
-  "contactNumber": "+123456789",
-  "city": "Oslo",
-  "street": "123 Forest Path",
-  "postalCode": "1234"
+  "name": "Seaside Retreat",
+  "description": "A beautiful retreat by the ocean with stunning views.",
+  "type": "GuestHouse",
+  "hasInstantBooking": false,
+  "contactEmail": "contact@seasideretreat.com",
+  "contactNumber": "+987654321",
+  "city": "Bergen",
+  "street": "789 Ocean Drive",
+  "postalCode": "5678"
 }

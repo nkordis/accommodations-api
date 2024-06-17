@@ -1,12 +1,11 @@
-﻿using Accommodations.App.Accommodations.Dtos;
-using Accommodations.Domain.Entities;
+﻿using Accommodations.Domain.Entities;
 using FluentValidation;
 
-namespace Accommodations.App.Validators
+namespace Accommodations.App.Accommodations.Commands.CreateAccommodation
 {
-    public class CreateAccommodationDtoValidator : AbstractValidator<CreateAccommodationDto>
+    public class CreateAccommodationCommandValidator : AbstractValidator<CreateAccommodationCommand>
     {
-        public CreateAccommodationDtoValidator()
+        public CreateAccommodationCommandValidator()
         {
             RuleFor(dto => dto.Name)
                 .NotEmpty()
@@ -40,7 +39,7 @@ namespace Accommodations.App.Validators
 
             RuleFor(dto => dto.PostalCode)
                 .Length(1, 50)
-                .When(dto => !string.IsNullOrEmpty(dto.PostalCode));     
+                .When(dto => !string.IsNullOrEmpty(dto.PostalCode));
         }
 
 

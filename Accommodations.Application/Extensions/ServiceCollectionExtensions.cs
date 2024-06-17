@@ -1,5 +1,4 @@
 ﻿using Accommodations.App.Accommodations;
-using Accommodations.App.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +11,7 @@ namespace Accommodations.App.Extensions
         {
             var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
 
-            services.AddScoped<IAccommodationsService, AccommodationsService>();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(applicationAssembly));
 
             services.AddAutoMapper(applicationAssembly);
 
