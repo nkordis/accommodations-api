@@ -26,7 +26,7 @@ namespace Accommodations.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAccommodation([FromBody]CreateAccommodationDto createAccommodationDto)
+        public async Task<IActionResult> CreateAccommodation(CreateAccommodationDto createAccommodationDto)
         {
             Guid guid = await accommodationsService.Create(createAccommodationDto);
 

@@ -6,7 +6,7 @@ namespace Accommodations.App.Accommodations.Dtos
     {
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
-        public AccommodationType Type { get; set; } = default!;
+        public string Type { get; set; } = default!;
         public bool HasInstantBooking { get; set; }
         public string? ContactEmail { get; set; }
         public string? ContactNumber { get; set; }

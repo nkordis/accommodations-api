@@ -8,6 +8,7 @@ namespace Accommodations.App.Accommodations.Dtos
         public AccommodationsProfile()
         {
             CreateMap<CreateAccommodationDto, Accommodation>()
+                .ForMember(d => d.Type, opt => opt.MapFrom(src => Enum.Parse<AccommodationType>(src.Type, true)))
                 .ForMember(d => d.Address, opt => opt.MapFrom(src => new Address()
                 {
                     City = src.City,
