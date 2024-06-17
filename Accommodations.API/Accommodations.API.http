@@ -13,6 +13,10 @@ GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba
 
 ###
 
+DELETE {{Accommodations_API_HostAddress}}/api/accommodations/68186220-7f0f-4cd1-69ce-08dc8d53c4f0
+
+###
+
 POST {{Accommodations_API_HostAddress}}/api/accommodations
 Content-Type: application/json
 
@@ -27,3 +31,6 @@ Content-Type: application/json
   "street": "789 Ocean Drive",
   "postalCode": "5678"
 }
+
+###
+

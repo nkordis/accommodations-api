@@ -14,6 +14,12 @@ namespace Accommodations.Infra.Repositories
             return entity.Id;
         }
 
+        public async Task Delete(Accommodation entity)
+        {
+            _dbContext.Remove(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Accommodation>> GetAllAsync()
         {
             var accommodations = await _dbContext.Accommodations.ToListAsync();

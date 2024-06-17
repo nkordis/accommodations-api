@@ -1,4 +1,5 @@
 ﻿using Accommodations.App.Accommodations.Commands.CreateAccommodation;
+using Accommodations.App.Accommodations.Commands.DeleteAccommodation;
 using Accommodations.App.Accommodations.Queries.GetAccommodationById;
 using Accommodations.App.Accommodations.Queries.GetAllAccommodations;
 using MediatR;
@@ -26,6 +27,17 @@ namespace Accommodations.API.Controllers
                 return NotFound("The requested Id is not found");
 
             return Ok(accommodation);
+        }
+
+        [HttpDelete("{guid}")]
+        public async Task<IActionResult> DeleteByGuid([FromRoute] Guid guid)
+        {
+            var isDeleted = await mediator.Send(new DeleteAccommodationCommand(guid));
+
+            if (isDeleted)
+                return NoContent();
+
+            return NotFound();
         }
 
         [HttpPost]
