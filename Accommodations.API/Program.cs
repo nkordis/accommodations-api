@@ -1,4 +1,5 @@
 using Accommodations.API.Configurations;
+using Accommodations.API.Middlewares;
 using Accommodations.App.Extensions;
 using Accommodations.Infra.Extensions;
 using Accommodations.Infra.Seeders;
@@ -31,6 +32,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
+
 builder.Services.AddApplication();
 builder.Services.AddDbInfrastructure(builder.Configuration);
 builder.Host.UseSerilog((context, configuration) =>
@@ -45,6 +48,7 @@ var seeder = scope.ServiceProvider.GetRequiredService<IAccommodationSeeder>();
 await seeder.Seed();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseSerilogRequestLogging();
 
