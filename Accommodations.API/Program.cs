@@ -8,6 +8,9 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var serilogSettings = builder.Configuration.GetSection("Serilog").Get<SerilogSettings>()
+    ?? throw new InvalidOperationException("Serilog settings are not configured properly.");
+
 var swaggerSettings = builder.Configuration.GetSection("Swagger")?.Get<SwaggerSettings>() 
     ?? throw new InvalidOperationException("Swagger settings are not configured properly.");
 
