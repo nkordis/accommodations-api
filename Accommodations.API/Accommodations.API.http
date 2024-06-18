@@ -13,7 +13,7 @@ GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba
 
 ###
 
-DELETE {{Accommodations_API_HostAddress}}/api/accommodations/68186220-7f0f-4cd1-69ce-08dc8d53c4f0
+DELETE {{Accommodations_API_HostAddress}}/api/accommodations/d70c031f-d894-460b-2ee3-08dc8f0c9b9a
 
 ###
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 
 ###
 
-PATCH {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c
+PATCH {{Accommodations_API_HostAddress}}/api/accommodations/d70c031f-d894-460b-2ee3-08dc8f0c9b9a
 Content-Type: application/json
 
 {

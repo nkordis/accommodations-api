@@ -13,7 +13,8 @@ namespace Accommodations.Infra.Extensions
         public static void AddDbInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("AccommodationsDb");
-            services.AddDbContext<AccommodationsDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<AccommodationsDbContext>(options => options.UseSqlServer(connectionString)
+            .EnableSensitiveDataLogging());
 
             services.AddScoped<IAccommodationSeeder, AccommodationSeeder>();
             services.AddScoped<IAccommodationsRepository, AccommodationsRepository>();

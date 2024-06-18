@@ -11,7 +11,7 @@ namespace Accommodations.App.Accommodations.Commands.CreateAccommodation
     {
         public async Task<Guid> Handle(CreateAccommodationCommand request, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Creating a new accommodation");
+            logger.LogInformation("Creating a new accommodation {@Accommodation}", request);
             var accommodation = mapper.Map<Accommodation>(request);
             Guid guid = await accommodationsRepository.Create(accommodation);
 

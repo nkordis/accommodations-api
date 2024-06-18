@@ -1,5 +1,4 @@
-﻿using Accommodations.App.Accommodations.Commands.CreateAccommodation;
-using Accommodations.App.Accommodations.Dtos;
+﻿using Accommodations.App.Accommodations.Dtos;
 using Accommodations.Domain.Repositories;
 using AutoMapper;
 using MediatR;
@@ -7,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Accommodations.App.Accommodations.Queries.GetAllAccommodations
 {
-    public class GetAllAccommodationsQueryHandler(ILogger<CreateAccommodationCommandHandler> logger,
+    public class GetAllAccommodationsQueryHandler(ILogger<GetAllAccommodationsQueryHandler> logger,
         IMapper mapper, IAccommodationsRepository accommodationsRepository) : IRequestHandler<GetAllAccommodationsQuery,
         IEnumerable<AccommodationDto>>
     {
