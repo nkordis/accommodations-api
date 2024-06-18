@@ -24,10 +24,6 @@ namespace Accommodations.API.Controllers
         public async Task<ActionResult<AccommodationDto?>> GetByGuid([FromRoute] Guid guid)
         {
             var accommodation = await mediator.Send(new GetAccommodationByIdQuery(guid));
-
-            if (accommodation is null)
-                return NotFound("The requested Id is not found");
-
             return Ok(accommodation);
         }
 
@@ -36,12 +32,8 @@ namespace Accommodations.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteByGuid([FromRoute] Guid guid)
         {
-            var isDeleted = await mediator.Send(new DeleteAccommodationCommand(guid));
-
-            if (isDeleted)
-                return NoContent();
-
-            return NotFound();
+            await mediator.Send(new DeleteAccommodationCommand(guid));
+            return NoContent();
         }
 
         [HttpPatch("{guid}")]
@@ -51,12 +43,9 @@ namespace Accommodations.API.Controllers
             UpdateAccommodationCommand command)
         {
             command.Guid = guid;
-            var isUpdated = await mediator.Send(command);
+            await mediator.Send(command);
 
-            if (isUpdated)
-                return NoContent();
-
-            return NotFound();
+            return NoContent();
         }
 
         [HttpPost]

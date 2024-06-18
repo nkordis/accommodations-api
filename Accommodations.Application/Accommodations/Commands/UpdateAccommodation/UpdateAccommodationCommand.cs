@@ -2,7 +2,7 @@
 
 namespace Accommodations.App.Accommodations.Commands.UpdateAccommodation
 {
-    public class UpdateAccommodationCommand : IRequest<bool>
+    public class UpdateAccommodationCommand : IRequest
     {
         public Guid Guid { get; set; }
         public string? Name { get; set; } = default!;

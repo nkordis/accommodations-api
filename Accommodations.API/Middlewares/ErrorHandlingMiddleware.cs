@@ -1,4 +1,6 @@
 ﻿
+using Accommodations.Domain.Exceptions;
+
 namespace Accommodations.API.Middlewares
 {
     public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : IMiddleware
@@ -9,7 +11,14 @@ namespace Accommodations.API.Middlewares
             {
                 await next.Invoke(context);
             }
-            catch (Exception ex) 
+            catch (NotFoundException notFound)
+            {
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync(notFound.Message);
+
+                logger.LogWarning(notFound.Message);
+            }
+            catch (Exception ex)
             {
                 logger.LogError(ex, ex.Message);
 
