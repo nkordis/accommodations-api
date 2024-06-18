@@ -1,18 +1,31 @@
+using Accommodations.API.Configurations;
 using Accommodations.App.Extensions;
 using Accommodations.Infra.Extensions;
 using Accommodations.Infra.Seeders;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Compact;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var swaggerSettings = builder.Configuration.GetSection("Swagger")?.Get<SwaggerSettings>() 
+    ?? throw new InvalidOperationException("Swagger settings are not configured properly.");
 
 // Add services to the container.
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.Converters.Add(new StringEnumConverter());
+});
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc(swaggerSettings.Version, new OpenApiInfo
+    {
+        Version = swaggerSettings.Version,
+        Title = swaggerSettings.Title,
+        Description = swaggerSettings.Description,
+    });
 });
 
 builder.Services.AddApplication();
@@ -31,6 +44,14 @@ await seeder.Seed();
 // Configure the HTTP request pipeline.
 
 app.UseSerilogRequestLogging();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint(swaggerSettings.Endpoint, $"{swaggerSettings.Title} {swaggerSettings.Version}");
+    c.RoutePrefix = swaggerSettings.RoutePrefix;
+});
+
 
 app.UseHttpsRedirection();
 
