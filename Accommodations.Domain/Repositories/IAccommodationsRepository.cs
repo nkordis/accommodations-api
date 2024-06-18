@@ -8,5 +8,6 @@ namespace Accommodations.Domain.Repositories
         Task<Accommodation?> GetAsync(Guid guid);
         Task<Guid> Create(Accommodation entity);
         Task Delete(Accommodation entity);
+        Task SaveChanges();
     }
 }

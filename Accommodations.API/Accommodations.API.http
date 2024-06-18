@@ -34,3 +34,11 @@ Content-Type: application/json
 
 ###
 
+PATCH {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c
+Content-Type: application/json
+
+{
+  "name": "CHange the name again"
+}
+
+###

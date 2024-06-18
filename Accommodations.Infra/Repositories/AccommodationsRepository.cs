@@ -33,5 +33,7 @@ namespace Accommodations.Infra.Repositories
                 .FirstOrDefaultAsync(a => a.Id == guid);
             return accommodation;
         }
+        public Task SaveChanges()
+            => _dbContext.SaveChangesAsync();
     }
 }
