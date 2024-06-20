@@ -1,4 +1,6 @@
 ﻿using Accommodations.App.Units.Commands.CreateUnit;
+using Accommodations.App.Units.Dtos;
+using Accommodations.App.Units.Queries.GetAllUnits;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +17,13 @@ namespace Accommodations.API.Controllers
             Guid guid = await mediator.Send(command);
 
             return Created();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UnitDto>>> GetAllForAccommodation([FromRoute]Guid accommodationId)
+        {
+            var units = await mediator.Send(new GetAllUnitsQuery(accommodationId));
+            return Ok(units);
         }
     }
 }

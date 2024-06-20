@@ -58,3 +58,7 @@ Content-Type: application/json
   "postalCode": "12345",
   "isAvailable": true
 }
+
+###
+
+GET {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c/units

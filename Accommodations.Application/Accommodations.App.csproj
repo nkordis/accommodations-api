@@ -17,8 +17,4 @@
     <ProjectReference Include="..\Accommodations.Domain\Accommodations.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Units\Queries\" />
-  </ItemGroup>
-
 </Project>
