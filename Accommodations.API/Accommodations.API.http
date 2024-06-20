@@ -62,3 +62,7 @@ Content-Type: application/json
 ###
 
 GET {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c/units
+
+###
+
+GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba1-df8cfbab82f0/units/5dbc1753-4d9f-4c94-b1d6-98442a8be0f6

@@ -19,8 +19,6 @@ namespace Accommodations.App.Units.Queries.GetAllUnits
             if (accommodation == null) 
                 throw new NotFoundException(nameof(accommodation), request.AccommodationId.ToString());
 
-            //var units = await unitsRepository.GetAllAsync(request.AccommodationId); 
-            //var unitsDto = mapper.Map<IEnumerable<UnitDto>>(units);
             var unitsDto = mapper.Map<IEnumerable<UnitDto>>(accommodation.Units);
 
             return unitsDto;
