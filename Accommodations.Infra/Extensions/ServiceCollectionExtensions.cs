@@ -18,6 +18,7 @@ namespace Accommodations.Infra.Extensions
 
             services.AddScoped<IAccommodationSeeder, AccommodationSeeder>();
             services.AddScoped<IAccommodationsRepository, AccommodationsRepository>();
+            services.AddScoped<IUnitsRepository, UnitsRepository>();
         }
     }
 }

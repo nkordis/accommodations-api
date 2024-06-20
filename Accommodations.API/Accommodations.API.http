@@ -42,3 +42,19 @@ Content-Type: application/json
 }
 
 ###
+
+POST {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c/units
+Content-Type: application/json
+
+{
+  "name": "Luxury Suite",
+  "description": "A luxurious suite with all modern amenities.",
+  "price": 250.00,
+  "billingPeriod": "PerDay",
+  "capacity": 2,
+  "type": "Suite",
+  "city": "Bergen",
+  "street": "123 Luxury Lane",
+  "postalCode": "12345",
+  "isAvailable": true
+}
