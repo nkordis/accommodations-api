@@ -1,6 +1,7 @@
 using Accommodations.API.Configurations;
 using Accommodations.API.Middlewares;
 using Accommodations.App.Extensions;
+using Accommodations.Domain.Entities;
 using Accommodations.Infra.Extensions;
 using Accommodations.Infra.Seeders;
 using Microsoft.OpenApi.Models;
@@ -63,6 +64,8 @@ app.UseSwaggerUI(c =>
 
 
 app.UseHttpsRedirection();
+
+app.MapIdentityApi<User>();
 
 app.UseAuthorization();
 

@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Accommodations.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Accommodations.Infra.Persistence
 {
-    internal class AccommodationsDbContext(DbContextOptions<AccommodationsDbContext> options) : DbContext(options)
+    internal class AccommodationsDbContext(DbContextOptions<AccommodationsDbContext> options) 
+        : IdentityDbContext<User>(options)
     {
         internal DbSet<Accommodation> Accommodations { get; set; }
         internal DbSet<Unit> Units { get; set; }

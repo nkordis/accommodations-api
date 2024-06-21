@@ -70,3 +70,23 @@ GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba
 ###
 
 DELETE {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c/units/0de91ecc-773c-49b2-fff2-08dc916a22cd
+
+###
+
+POST {{Accommodations_API_HostAddress}}/register
+Content-Type: application/json
+
+{
+    "email": "testuser@test.com",
+    "password":"Password123!"
+}
+
+###
+
+POST {{Accommodations_API_HostAddress}}/login
+Content-Type: application/json
+
+{
+    "email": "testuser@test.com",
+    "password":"Password123!"
+}

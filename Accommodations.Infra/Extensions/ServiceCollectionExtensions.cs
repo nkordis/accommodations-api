@@ -1,4 +1,5 @@
-﻿using Accommodations.Domain.Repositories;
+﻿using Accommodations.Domain.Entities;
+using Accommodations.Domain.Repositories;
 using Accommodations.Infra.Persistence;
 using Accommodations.Infra.Repositories;
 using Accommodations.Infra.Seeders;
@@ -15,6 +16,9 @@ namespace Accommodations.Infra.Extensions
             var connectionString = configuration.GetConnectionString("AccommodationsDb");
             services.AddDbContext<AccommodationsDbContext>(options => options.UseSqlServer(connectionString)
             .EnableSensitiveDataLogging());
+
+            services.AddIdentityApiEndpoints<User>()
+                .AddEntityFrameworkStores<AccommodationsDbContext>();
 
             services.AddScoped<IAccommodationSeeder, AccommodationSeeder>();
             services.AddScoped<IAccommodationsRepository, AccommodationsRepository>();
