@@ -12,5 +12,11 @@ namespace Accommodations.Infra.Repositories
             await _dbContext.SaveChangesAsync();
             return entity.Id;
         }
+
+        public async Task Delete(Unit entity)
+        {
+            _dbContext.Units.Remove(entity);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

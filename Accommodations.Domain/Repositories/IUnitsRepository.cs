@@ -5,5 +5,6 @@ namespace Accommodations.Domain.Repositories
     public interface IUnitsRepository
     {
         Task<Guid> Create(Unit entity);
+        Task Delete(Unit unit);
     }
 }

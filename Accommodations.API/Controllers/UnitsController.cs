@@ -1,4 +1,5 @@
 ﻿using Accommodations.App.Units.Commands.CreateUnit;
+using Accommodations.App.Units.Commands.DeleteUnit;
 using Accommodations.App.Units.Dtos;
 using Accommodations.App.Units.Queries.GetAllUnits;
 using Accommodations.App.Units.Queries.GetUnitById;
@@ -32,6 +33,15 @@ namespace Accommodations.API.Controllers
         {
             var unit = await mediator.Send(new GetUnitByIdQuery(accommodationId, guid));
             return Ok(unit);
+        }
+
+        [HttpDelete("{guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UnitDto>> DeleteByIdForAccommodation([FromRoute] Guid accommodationId, [FromRoute] Guid guid)
+        {
+            await mediator.Send(new DeleteUnitCommand(accommodationId, guid));
+            return NoContent();
         }
     }
 }
