@@ -18,7 +18,7 @@ namespace Accommodations.API.Controllers
             command.AccommodationId = accommodationId;
             Guid guid = await mediator.Send(command);
 
-            return Created();
+            return CreatedAtAction(nameof(GetByIdForAccommodation), new {accommodationId, guid}, null);
         }
 
         [HttpGet]
