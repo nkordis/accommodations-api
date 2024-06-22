@@ -40,7 +40,9 @@ app.UseSwaggerUI(c =>
 
 app.UseHttpsRedirection();
 
-app.MapGroup("api/user").MapIdentityApi<User>();
+app.MapGroup("api/user")
+    .WithTags("User")
+    .MapIdentityApi<User>();
 
 app.UseAuthorization();
 
