@@ -25,6 +25,9 @@ public static class WebApplicationBuilderExtensions
         SerilogSettings = builder.Configuration.GetSection("Serilog").Get<SerilogSettings>()
             ?? throw new InvalidOperationException("Serilog settings are not configured properly.");
 
+        // Add authentication
+        builder.Services.AddAuthentication();
+
         // Add controllers with Newtonsoft JSON options
         builder.Services.AddControllers().AddNewtonsoftJson(options =>
         {

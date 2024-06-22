@@ -5,12 +5,14 @@ using Accommodations.App.Accommodations.Dtos;
 using Accommodations.App.Accommodations.Queries.GetAccommodationById;
 using Accommodations.App.Accommodations.Queries.GetAllAccommodations;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Accommodations.API.Controllers
 {
     [ApiController]
     [Route("/api/accommodations")]
+    [Authorize]
     public class AccommodationsController(IMediator mediator) : ControllerBase
     {
         [HttpGet]

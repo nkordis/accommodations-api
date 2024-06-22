@@ -1,4 +1,5 @@
 @Accommodations_API_HostAddress = https://localhost:7257
+@token = CfDJ8FSAtkUM8fBOh7EkbiBYh70ZH1MXBRbjcWoX3Od8J_oYDMmh2YR4vb9cmU3HqreNUDJoatOxnWYMqI8zIb-j1ZVyKukFsGDanUILr-q-sUyzp7rhmiZn0NU60sp_ndPHC9Tv8xJNS0H028XaeVBxtDd0DGp1A8xyn2Q7rm-GMfK-AtN_4DZ3xuI4ul08TxlK_EpNYmcKeuHROtmLDDFmypk5N7t7mDyK34--CVHcxWxt-cdCHo-yf5Tga5GYlroXDPUNu2sZ_ER0GGrWdsGG-z23v4FEWVh7qA1Bk4_1Mkajjy1LaBuhA45qK4Q-hvY7MFZcNIES1nubuKIjQzMXtHpF7ZG9Kd5G0qIQG-PNzOH5KtiaZki5MpoeOteClxNnvn0Fm5Km36yifT_PTemZ3ZnvloSfvh2WR29-ZlWFWx0dBXqDdDg9H-ORhzz4Q-Wapc-cGwOIdg4XwHdp8f4rixF-0x5a7HeAbgvepuKvKVumYDlg1XIqn8k4oUBjmdPrshllpmmbroDNx-8MUnHm5Clugt-BVAbdkU8DqYFUvm1IFFhgllYtCJ8IioI1APldh2YT16LeYXKtXcL6Sjvzo4kd-uX7zQEvjTUWsia1OJDjyUuDEgVasEM4fLP0OgUGJOaRMRKBEXOCCZSsOXNwrXaUCLIBbXsYOKzcow0UKvhdygrYNc8g1_-ClOhQ_t0BbA
 
 
 GET {{Accommodations_API_HostAddress}}/api/healthcheck
@@ -6,18 +7,22 @@ GET {{Accommodations_API_HostAddress}}/api/healthcheck
 ###
 
 GET {{Accommodations_API_HostAddress}}/api/accommodations
+Authorization: Bearer {{token}}
 
 ###
 
 GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba1-df8cfbab82f0
+Authorization: Bearer {{token}}
 
 ###
 
 DELETE {{Accommodations_API_HostAddress}}/api/accommodations/d70c031f-d894-460b-2ee3-08dc8f0c9b9a
+Authorization: Bearer {{token}}
 
 ###
 
 POST {{Accommodations_API_HostAddress}}/api/accommodations
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -35,6 +40,7 @@ Content-Type: application/json
 ###
 
 PATCH {{Accommodations_API_HostAddress}}/api/accommodations/d70c031f-d894-460b-2ee3-08dc8f0c9b9a
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -44,6 +50,7 @@ Content-Type: application/json
 ###
 
 POST {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c/units
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -62,18 +69,21 @@ Content-Type: application/json
 ###
 
 GET {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c/units
+Authorization: Bearer {{token}}
 
 ###
 
 GET {{Accommodations_API_HostAddress}}/api/accommodations/cf14a8af-d3f4-4c6f-bba1-df8cfbab82f0/units/5dbc1753-4d9f-4c94-b1d6-98442a8be0f6
+Authorization: Bearer {{token
 
 ###
 
 DELETE {{Accommodations_API_HostAddress}}/api/accommodations/34e8a049-6b33-4f43-9dc9-08dc8d0eef6c/units/0de91ecc-773c-49b2-fff2-08dc916a22cd
+Authorization: Bearer {{token}}
 
 ###
 
-POST {{Accommodations_API_HostAddress}}/register
+POST {{Accommodations_API_HostAddress}}/api/user/register
 Content-Type: application/json
 
 {
@@ -83,7 +93,7 @@ Content-Type: application/json
 
 ###
 
-POST {{Accommodations_API_HostAddress}}/login
+POST {{Accommodations_API_HostAddress}}/api/user/login
 Content-Type: application/json
 
 {

@@ -4,12 +4,14 @@ using Accommodations.App.Units.Dtos;
 using Accommodations.App.Units.Queries.GetAllUnits;
 using Accommodations.App.Units.Queries.GetUnitById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Accommodations.API.Controllers
 {
     [Route("api/accommodations/{accommodationId}/units")]
     [ApiController]
+    [Authorize]
     public class UnitsController(IMediator mediator) : ControllerBase
     {
         [HttpPost]
