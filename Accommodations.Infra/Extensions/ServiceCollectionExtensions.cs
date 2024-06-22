@@ -3,6 +3,7 @@ using Accommodations.Domain.Repositories;
 using Accommodations.Infra.Persistence;
 using Accommodations.Infra.Repositories;
 using Accommodations.Infra.Seeders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ namespace Accommodations.Infra.Extensions
             .EnableSensitiveDataLogging());
 
             services.AddIdentityApiEndpoints<User>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AccommodationsDbContext>();
 
             services.AddScoped<IAccommodationSeeder, AccommodationSeeder>();

@@ -1,6 +1,8 @@
 ﻿
+using Accommodations.Domain.Constants;
 using Accommodations.Domain.Entities;
 using Accommodations.Infra.Persistence;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Accommodations.Infra.Seeders
@@ -17,7 +19,26 @@ namespace Accommodations.Infra.Seeders
                     _dbContext.Accommodations.AddRange(accommodations);
                     await _dbContext.SaveChangesAsync();
                 }
+
+                if (!_dbContext.Roles.Any())
+                {
+                    var roles = GetRoles();
+                    _dbContext.Roles.AddRange(roles);
+                    await _dbContext.SaveChangesAsync();
+                }
             }
+        }
+
+        private IEnumerable<IdentityRole> GetRoles()
+        {
+            List<IdentityRole> roles = 
+                [
+                    new (UserRoles.User),
+                    new (UserRoles.Owner),
+                    new (UserRoles.Admin),
+                ];
+
+            return roles;
         }
 
         private IEnumerable<Accommodation> GetAccommodations()

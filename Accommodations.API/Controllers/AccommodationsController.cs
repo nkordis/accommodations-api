@@ -4,6 +4,7 @@ using Accommodations.App.Accommodations.Commands.UpdateAccommodation;
 using Accommodations.App.Accommodations.Dtos;
 using Accommodations.App.Accommodations.Queries.GetAccommodationById;
 using Accommodations.App.Accommodations.Queries.GetAllAccommodations;
+using Accommodations.Domain.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +52,7 @@ namespace Accommodations.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Owner)]
         public async Task<IActionResult> CreateAccommodation(CreateAccommodationCommand command)
         {
             Guid guid = await mediator.Send(command);
