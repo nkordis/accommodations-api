@@ -31,7 +31,26 @@ builder.Services.AddSwaggerGen(c =>
         Title = swaggerSettings.Title,
         Description = swaggerSettings.Description,
     });
+
+    c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme 
+    { 
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearerAuth"}
+            },
+            []
+        }
+    });
 });
+
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
@@ -65,7 +84,7 @@ app.UseSwaggerUI(c =>
 
 app.UseHttpsRedirection();
 
-app.MapIdentityApi<User>();
+app.MapGroup("api/user").MapIdentityApi<User>();
 
 app.UseAuthorization();
 
