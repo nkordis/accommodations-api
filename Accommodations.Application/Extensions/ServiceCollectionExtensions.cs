@@ -1,4 +1,4 @@
-﻿using Accommodations.App.Accommodations;
+﻿using Accommodations.App.User;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +17,10 @@ namespace Accommodations.App.Extensions
 
             services.AddValidatorsFromAssembly(applicationAssembly)
                 .AddFluentValidationAutoValidation();
+
+            services.AddScoped<IUserContext, UserContext>();
+
+            services.AddHttpContextAccessor();
         }
     }
 }
