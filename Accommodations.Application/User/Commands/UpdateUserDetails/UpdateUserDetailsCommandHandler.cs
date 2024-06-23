@@ -3,11 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Accommodations.App.User.Commands
+namespace Accommodations.App.User.Commands.UpdateUserDetails
 {
-    public class UpdateUserDetailsCommandHandler(ILogger<UpdateUserDetailsCommandHandler> logger, 
-        IUserContext userContext, 
-        IUserStore<Domain.Entities.User> userStore): IRequestHandler<UpdateUserDetailsCommand>
+    public class UpdateUserDetailsCommandHandler(ILogger<UpdateUserDetailsCommandHandler> logger,
+        IUserContext userContext,
+        IUserStore<Domain.Entities.User> userStore) : IRequestHandler<UpdateUserDetailsCommand>
     {
         public async Task Handle(UpdateUserDetailsCommand request, CancellationToken cancellationToken)
         {
@@ -17,7 +17,7 @@ namespace Accommodations.App.User.Commands
 
             var dbUser = await userStore.FindByIdAsync(user!.Id, cancellationToken);
 
-            if (dbUser == null) 
+            if (dbUser == null)
                 throw new NotFoundException(nameof(User), user!.Id);
 
             dbUser.Nationality = request.Nationality;

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Accommodations.App.User.Commands
+namespace Accommodations.App.User.Commands.UpdateUserDetails
 {
     public class UpdateUserDetailsCommand : IRequest
     {
