@@ -1,4 +1,5 @@
 ﻿using Accommodations.App.User.Commands.AssignUserRole;
+using Accommodations.App.User.Commands.UnassignUserRole;
 using Accommodations.App.User.Commands.UpdateUserDetails;
 using Accommodations.Domain.Constants;
 using MediatR;
@@ -22,6 +23,14 @@ namespace Accommodations.API.Controllers
         [HttpPost("userRole")]
         [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> AssignUserRole(AssignUserRoleCommand command)
+        {
+            await mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("userRole")]
+        [Authorize(Roles = UserRoles.Admin)]
+        public async Task<IActionResult> UnassignUserRole(UnassignUserRoleCommand command)
         {
             await mediator.Send(command);
             return NoContent();
