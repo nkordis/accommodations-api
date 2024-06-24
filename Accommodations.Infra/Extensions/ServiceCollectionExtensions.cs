@@ -27,6 +27,9 @@ namespace Accommodations.Infra.Extensions
             services.AddScoped<IAccommodationSeeder, AccommodationSeeder>();
             services.AddScoped<IAccommodationsRepository, AccommodationsRepository>();
             services.AddScoped<IUnitsRepository, UnitsRepository>();
+
+            services.AddAuthorizationBuilder()
+                .AddPolicy(PolicyNames.HasNationality, builder => builder.RequireClaim(AppClaimTypes.Nationality));
         }
     }
 }
