@@ -1,9 +1,11 @@
 ﻿using Accommodations.Domain.Entities;
 using Accommodations.Domain.Repositories;
 using Accommodations.Infra.Authorization;
+using Accommodations.Infra.Authorization.Requirements;
 using Accommodations.Infra.Persistence;
 using Accommodations.Infra.Repositories;
 using Accommodations.Infra.Seeders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +31,12 @@ namespace Accommodations.Infra.Extensions
             services.AddScoped<IUnitsRepository, UnitsRepository>();
 
             services.AddAuthorizationBuilder()
-                .AddPolicy(PolicyNames.HasNationality, builder => builder.RequireClaim(AppClaimTypes.Nationality));
+                .AddPolicy(PolicyNames.HasNationality, 
+                    builder => builder.RequireClaim(AppClaimTypes.Nationality))
+                .AddPolicy(PolicyNames.AtLeast18,
+                    builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
+
+            services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
         }
     }
 }
