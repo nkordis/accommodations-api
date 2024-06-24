@@ -1,5 +1,6 @@
 ﻿using Accommodations.Domain.Entities;
 using Accommodations.Domain.Repositories;
+using Accommodations.Infra.Authorization;
 using Accommodations.Infra.Persistence;
 using Accommodations.Infra.Repositories;
 using Accommodations.Infra.Seeders;
@@ -20,6 +21,7 @@ namespace Accommodations.Infra.Extensions
 
             services.AddIdentityApiEndpoints<User>()
                 .AddRoles<IdentityRole>()
+                .AddClaimsPrincipalFactory<AccommodationsUserClaimsPrincipalFactory>()
                 .AddEntityFrameworkStores<AccommodationsDbContext>();
 
             services.AddScoped<IAccommodationSeeder, AccommodationSeeder>();
