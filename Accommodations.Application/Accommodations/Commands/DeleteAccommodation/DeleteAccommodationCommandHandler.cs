@@ -22,7 +22,7 @@ namespace Accommodations.App.Accommodations.Commands.DeleteAccommodation
                 throw new NotFoundException(nameof(Accommodation), request.Guid.ToString());
 
             if (!accommodationAuthorizationService.Authorize(accommodation, ResourceOperation.Delete))
-                throw new InvalidOperationException("User is not authorized to delete the accommodation");
+                throw new ForbidException();
 
             await accommodationsRepository.Delete(accommodation);
         }

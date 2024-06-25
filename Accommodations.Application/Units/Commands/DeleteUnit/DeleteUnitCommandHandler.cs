@@ -1,4 +1,6 @@
-﻿using Accommodations.Domain.Exceptions;
+﻿using Accommodations.Domain.Constants;
+using Accommodations.Domain.Exceptions;
+using Accommodations.Domain.Interfaces;
 using Accommodations.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +8,8 @@ using Microsoft.Extensions.Logging;
 namespace Accommodations.App.Units.Commands.DeleteUnit
 {
     public class DeleteUnitCommandHandler(ILogger<DeleteUnitCommandHandler> logger,
-        IAccommodationsRepository accommodationsRepository, IUnitsRepository unitsRepository) : IRequestHandler<DeleteUnitCommand>
+        IAccommodationsRepository accommodationsRepository, IUnitsRepository unitsRepository, 
+        IAccommodationAuthorizationService accommodationAuthorizationService) : IRequestHandler<DeleteUnitCommand>
     {
         public async Task Handle(DeleteUnitCommand request, CancellationToken cancellationToken)
         {
@@ -18,6 +21,9 @@ namespace Accommodations.App.Units.Commands.DeleteUnit
                 throw new NotFoundException(nameof(accommodation), request.AccommodationId.ToString());
             
             var unit = accommodation.Units.FirstOrDefault();
+
+            if (!accommodationAuthorizationService.Authorize(accommodation, ResourceOperation.Delete))
+                throw new ForbidException();
 
             if (unit == null)
                 throw new NotFoundException(nameof(unit), request.Guid.ToString());
