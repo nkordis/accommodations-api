@@ -1,5 +1,7 @@
-﻿using Accommodations.Domain.Entities;
+﻿using Accommodations.Domain.Constants;
+using Accommodations.Domain.Entities;
 using Accommodations.Domain.Exceptions;
+using Accommodations.Domain.Interfaces;
 using Accommodations.Domain.Repositories;
 using AutoMapper;
 using MediatR;
@@ -8,7 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace Accommodations.App.Accommodations.Commands.UpdateAccommodation
 {
     public class UpdateAccommodationCommandHandler(ILogger<UpdateAccommodationCommandHandler> logger, 
-        IMapper mapper, IAccommodationsRepository accommodationsRepository) : IRequestHandler<UpdateAccommodationCommand>
+        IMapper mapper, IAccommodationsRepository accommodationsRepository, 
+        IAccommodationAuthorizationService accommodationAuthorizationService) : IRequestHandler<UpdateAccommodationCommand>
     {
         public async Task Handle(UpdateAccommodationCommand request, CancellationToken cancellationToken)
         {
@@ -17,6 +20,9 @@ namespace Accommodations.App.Accommodations.Commands.UpdateAccommodation
 
             if (accommodation is null)
                 throw new NotFoundException(nameof(Accommodation), request.Guid.ToString());
+
+            if (!accommodationAuthorizationService.Authorize(accommodation, ResourceOperation.Update))
+                throw new ForbidException();
 
             mapper.Map(request, accommodation);
 

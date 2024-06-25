@@ -1,5 +1,6 @@
 ﻿
 using Accommodations.Domain.Exceptions;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Accommodations.API.Middlewares
 {
@@ -17,6 +18,11 @@ namespace Accommodations.API.Middlewares
                 await context.Response.WriteAsync(notFound.Message);
 
                 logger.LogWarning(notFound.Message);
+            }
+            catch (ForbidException)
+            {
+                context.Response.StatusCode = 403;
+                await context.Response.WriteAsync("Access forbidden");
             }
             catch (Exception ex)
             {
