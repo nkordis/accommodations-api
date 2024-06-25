@@ -17,6 +17,11 @@ namespace Accommodations.Infra.Migrations
                 nullable: false,
                 defaultValue: "");
 
+            migrationBuilder.Sql(@"
+            UPDATE Accommodations
+            SET OwnerId = (SELECT Id FROM AspNetUsers WHERE Email = 'owner@test.com')
+            ");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Accommodations_OwnerId",
                 table: "Accommodations",
