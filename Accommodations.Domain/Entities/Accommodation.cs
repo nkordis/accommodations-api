@@ -50,6 +50,16 @@ namespace Accommodations.Domain.Entities
         /// Gets or sets the list of units within the accommodation.
         /// </summary>
         public List<Unit> Units { get; set; } = new();
+
+        /// <summary>
+        /// Gets or sets the Owner of the accommodation.
+        /// </summary>
+        public User Owner { get; set; } = default!;
+
+        /// <summary>
+        /// Gets or sets the Owner's Id of the accommodation
+        /// </summary>
+        public string OwnerId { get; set; } = default!;
     }
 
     /// <summary>

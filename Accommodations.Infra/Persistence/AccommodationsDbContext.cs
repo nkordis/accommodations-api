@@ -15,15 +15,20 @@ namespace Accommodations.Infra.Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Accommodation>()
-                .OwnsOne(r => r.Address);
+                .OwnsOne(a => a.Address);
 
             modelBuilder.Entity<Unit>()
-                .OwnsOne(r => r.Address);
+                .OwnsOne(a => a.Address);
 
             modelBuilder.Entity<Accommodation>()
-                .HasMany(r => r.Units)
+                .HasMany(a => a.Units)
                 .WithOne()
-                .HasForeignKey(d => d.AccommodationId);
+                .HasForeignKey(un => un.AccommodationId);
+
+            modelBuilder.Entity<User>()
+                .HasMany(usr => usr.OwnedAccommodations)
+                .WithOne(a => a.Owner)
+                .HasForeignKey(a => a.OwnerId);
         }
     }
 }
