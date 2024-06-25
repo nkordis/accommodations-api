@@ -1,7 +1,9 @@
 ﻿using Accommodations.Domain.Entities;
+using Accommodations.Domain.Interfaces;
 using Accommodations.Domain.Repositories;
 using Accommodations.Infra.Authorization;
 using Accommodations.Infra.Authorization.Requirements;
+using Accommodations.Infra.Authorization.Services;
 using Accommodations.Infra.Persistence;
 using Accommodations.Infra.Repositories;
 using Accommodations.Infra.Seeders;
@@ -37,6 +39,7 @@ namespace Accommodations.Infra.Extensions
                     builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
 
             services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
+            services.AddScoped<IAccommodationAuthorizationService, AccommodationAuthorizationService>();
         }
     }
 }

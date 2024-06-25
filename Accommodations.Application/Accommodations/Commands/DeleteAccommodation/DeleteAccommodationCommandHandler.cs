@@ -1,5 +1,7 @@
-﻿using Accommodations.Domain.Entities;
+﻿using Accommodations.Domain.Constants;
+using Accommodations.Domain.Entities;
 using Accommodations.Domain.Exceptions;
+using Accommodations.Domain.Interfaces;
 using Accommodations.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -7,7 +9,9 @@ using Microsoft.Extensions.Logging;
 namespace Accommodations.App.Accommodations.Commands.DeleteAccommodation
 {
     public class DeleteAccommodationCommandHandler(ILogger<DeleteAccommodationCommandHandler> logger, 
-        IAccommodationsRepository accommodationsRepository) : IRequestHandler<DeleteAccommodationCommand>
+        IAccommodationsRepository accommodationsRepository, 
+        IAccommodationAuthorizationService accommodationAuthorizationService) 
+            : IRequestHandler<DeleteAccommodationCommand>
     {
         public async Task Handle(DeleteAccommodationCommand request, CancellationToken cancellationToken)
         {
@@ -16,6 +20,9 @@ namespace Accommodations.App.Accommodations.Commands.DeleteAccommodation
 
             if (accommodation is null)
                 throw new NotFoundException(nameof(Accommodation), request.Guid.ToString());
+
+            if (!accommodationAuthorizationService.Authorize(accommodation, ResourceOperation.Delete))
+                throw new InvalidOperationException("User is not authorized to delete the accommodation");
 
             await accommodationsRepository.Delete(accommodation);
         }
