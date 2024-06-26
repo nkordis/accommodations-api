@@ -33,12 +33,16 @@ namespace Accommodations.Infra.Extensions
             services.AddScoped<IUnitsRepository, UnitsRepository>();
 
             services.AddAuthorizationBuilder()
-                .AddPolicy(PolicyNames.HasNationality, 
+                .AddPolicy(PolicyNames.HasNationality,
                     builder => builder.RequireClaim(AppClaimTypes.Nationality))
                 .AddPolicy(PolicyNames.AtLeast18,
-                    builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
+                    builder => builder.AddRequirements(new MinimumAgeRequirement(18)))
+                .AddPolicy(PolicyNames.CreatedAtLeast2Accommodations,
+                    builder => builder.AddRequirements(new CreateMultipleAccommodationRequirement(2)));
+                 
 
             services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
+            services.AddScoped<IAuthorizationHandler, CreateMultipleAccommodationRequirementHandler>();
             services.AddScoped<IAccommodationAuthorizationService, AccommodationAuthorizationService>();
         }
     }

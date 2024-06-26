@@ -5,6 +5,7 @@ namespace Accommodations.Infra.Authorization
     {
         public const string HasNationality = "HasNationality";
         public const string AtLeast18 = "AtLeast18";
+        public const string CreatedAtLeast2Accommodations = "CreatedAtLeast2Accommodations";
     }
 
     public static class AppClaimTypes
