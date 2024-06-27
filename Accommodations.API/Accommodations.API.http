@@ -5,7 +5,7 @@ GET {{Accommodations_API_HostAddress}}/api/healthcheck
 
 ###
 
-GET {{Accommodations_API_HostAddress}}/api/accommodations
+GET {{Accommodations_API_HostAddress}}/api/accommodations?SearchPhrase=change
 Authorization: Bearer {{token}}
 
 ###

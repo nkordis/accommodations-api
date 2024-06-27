@@ -5,5 +5,6 @@ namespace Accommodations.App.Accommodations.Queries.GetAllAccommodations
 {
     public class GetAllAccommodationsQuery : IRequest<IEnumerable<AccommodationDto>>
     {
+        public string? SearchPhrase { get; set; }
     }
 }
