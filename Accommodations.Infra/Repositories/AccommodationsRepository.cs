@@ -26,13 +26,15 @@ namespace Accommodations.Infra.Repositories
             return accommodations;
         }
 
-        public async Task<IEnumerable<Accommodation>> GetAllMatchingAsync(string? searchPhrase)
+        public async Task<IEnumerable<Accommodation>> GetAllMatchingAsync(string? searchPhrase, int pageSize, int pageNumber)
         {
             var searchPhraseLower = searchPhrase?.ToLower();
             var accommodations = await _dbContext
                 .Accommodations
                 .Where(a => searchPhraseLower == null || (a.Name.ToLower().Contains(searchPhraseLower)
                                                        || a.Description.ToLower().Contains(searchPhraseLower)))
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
                 .ToListAsync();
 
             return accommodations;

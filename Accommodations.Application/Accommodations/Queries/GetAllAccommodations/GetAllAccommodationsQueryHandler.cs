@@ -13,7 +13,12 @@ namespace Accommodations.App.Accommodations.Queries.GetAllAccommodations
         public async Task<IEnumerable<AccommodationDto>> Handle(GetAllAccommodationsQuery request, CancellationToken cancellationToken)
         {
             logger.LogInformation("Getting all accommodations");
-            var accommodations = await accommodationsRepository.GetAllMatchingAsync(request.SearchPhrase);
+            // Set default values if they are not provided
+            var pageSize = request.PageSize > 0 ? request.PageSize : 10; 
+            var pageNumber = request.PageNumber > 0 ? request.PageNumber : 1; 
+
+            var accommodations = await accommodationsRepository.GetAllMatchingAsync(request.SearchPhrase,
+                pageSize, pageNumber);
             var accommodationsdto = mapper.Map<IEnumerable<AccommodationDto>>(accommodations);
 
             return accommodationsdto!;

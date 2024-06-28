@@ -17,6 +17,7 @@ namespace Accommodations.API.Controllers
     public class AccommodationsController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AccommodationDto>>> GetAll([FromQuery] GetAllAccommodationsQuery query)
         {
             var accommodations = await mediator.Send(query);
