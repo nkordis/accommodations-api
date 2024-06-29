@@ -1,7 +1,9 @@
-﻿using Accommodations.Domain.Entities;
+﻿using Accommodations.Domain.Constants;
+using Accommodations.Domain.Entities;
 using Accommodations.Domain.Repositories;
 using Accommodations.Infra.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Accommodations.Infra.Repositories
 {
@@ -26,7 +28,8 @@ namespace Accommodations.Infra.Repositories
             return accommodations;
         }
 
-        public async Task<(IEnumerable<Accommodation>, int)> GetAllMatchingAsync(string? searchPhrase, int pageSize, int pageNumber)
+        public async Task<(IEnumerable<Accommodation>, int)> GetAllMatchingAsync(string? searchPhrase, 
+            int pageSize, int pageNumber, string? sortBy, SortDirection sortDirection)
         {
             var searchPhraseLower = searchPhrase?.ToLower();
 
@@ -36,6 +39,23 @@ namespace Accommodations.Infra.Repositories
                                                        || a.Description.ToLower().Contains(searchPhraseLower)));
 
             var totalCount = await baseQuery.CountAsync();
+
+            if(sortBy != null)
+            {
+                var columnsSelector = new Dictionary<string, Expression<Func<Accommodation, object>>>
+                {
+                    {nameof(Accommodation.Name), a => a.Name },
+                    {nameof(Accommodation.Description), a => a.Description },
+                    {nameof(Accommodation.Type), a => a.Type },
+                    {nameof(Accommodation.Address.City), a => a.Address.City ?? "" }
+                };
+
+                var selectedColumn = columnsSelector[sortBy];
+
+                baseQuery = sortDirection == SortDirection.Ascending 
+                    ? baseQuery.OrderBy(selectedColumn)
+                    : baseQuery.OrderByDescending(selectedColumn);
+            }
 
             var accommodations = await baseQuery
                 .Skip(pageSize * (pageNumber - 1))

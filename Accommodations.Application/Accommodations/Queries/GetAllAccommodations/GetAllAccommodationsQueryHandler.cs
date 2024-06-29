@@ -14,12 +14,9 @@ namespace Accommodations.App.Accommodations.Queries.GetAllAccommodations
         public async Task<PagedResult<AccommodationDto>> Handle(GetAllAccommodationsQuery request, CancellationToken cancellationToken)
         {
             logger.LogInformation("Getting all accommodations");
-            //// Set default values if they are not provided
-            //var pageSize = request.PageSize > 0 ? request.PageSize : 10; 
-            //var pageNumber = request.PageNumber > 0 ? request.PageNumber : 1; 
 
             var (accommodations, totalCount) = await accommodationsRepository.GetAllMatchingAsync(request.SearchPhrase,
-                request.PageSize, request.PageNumber);
+                request.PageSize, request.PageNumber, request.SortBy, request.sortDirection);
             var accommodationsdto = mapper.Map<IEnumerable<AccommodationDto>>(accommodations);
 
             var result = new PagedResult<AccommodationDto>(accommodationsdto, totalCount, request.PageSize, request.PageNumber);
