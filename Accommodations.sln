@@ -5,11 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accommodations.API", "Accommodations.API\Accommodations.API.csproj", "{430E197A-B5C4-440D-98B2-6BAF0B872930}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accommodations.Domain", "Accommodations.Domain\Accommodations.Domain.csproj", "{4AB75DAB-0506-42A0-A1EA-BC3203AFB754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accommodations.Domain", "Accommodations.Domain\Accommodations.Domain.csproj", "{4AB75DAB-0506-42A0-A1EA-BC3203AFB754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accommodations.App", "Accommodations.Application\Accommodations.App.csproj", "{59529D6C-86D9-40CC-8A2E-93D928D13D56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accommodations.App", "Accommodations.Application\Accommodations.App.csproj", "{59529D6C-86D9-40CC-8A2E-93D928D13D56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accommodations.Infra", "Accommodations.Infra\Accommodations.Infra.csproj", "{87294160-AF82-4757-B861-134B82599514}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accommodations.Infra", "Accommodations.Infra\Accommodations.Infra.csproj", "{87294160-AF82-4757-B861-134B82599514}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accommodations.AppTests", "Accommodations.AppTests\Accommodations.AppTests.csproj", "{EF064C4F-9E4E-4EC7-9053-CE66A1F91D0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{87294160-AF82-4757-B861-134B82599514}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87294160-AF82-4757-B861-134B82599514}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87294160-AF82-4757-B861-134B82599514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF064C4F-9E4E-4EC7-9053-CE66A1F91D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF064C4F-9E4E-4EC7-9053-CE66A1F91D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF064C4F-9E4E-4EC7-9053-CE66A1F91D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF064C4F-9E4E-4EC7-9053-CE66A1F91D0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
