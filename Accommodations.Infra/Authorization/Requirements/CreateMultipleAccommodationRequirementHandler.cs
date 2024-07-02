@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Accommodations.Infra.Authorization.Requirements
 {
-    public class CreateMultipleAccommodationRequirementHandler(IAccommodationsRepository accommodationsRepository,
+    internal class CreateMultipleAccommodationRequirementHandler(IAccommodationsRepository accommodationsRepository,
         IUserContext userContext)
             : AuthorizationHandler<CreateMultipleAccommodationRequirement>
     {
