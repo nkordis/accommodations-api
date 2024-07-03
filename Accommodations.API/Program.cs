@@ -49,3 +49,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Defining Program class as public using partial keyword
+// This allows us to reference the Program class in our integration tests,
+// specifically for setting up the WebApplicationFactory, which requires a public class type.
+// This trick enables us to create an in-memory version of our API for integration testing.
+public partial class Program { }
