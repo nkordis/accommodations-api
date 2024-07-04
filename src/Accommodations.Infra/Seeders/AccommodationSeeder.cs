@@ -11,6 +11,11 @@ namespace Accommodations.Infra.Seeders
     {
         public async Task Seed()
         {
+            if (_dbContext.Database.GetPendingMigrations().Any())
+            {
+                await _dbContext.Database.MigrateAsync();
+            }
+
             if (await _dbContext.Database.CanConnectAsync())
             {
                 if (!_dbContext.Accommodations.Any())
