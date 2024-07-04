@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Accommodations.Infra\Accommodations.Infra.csproj" />
+    <ProjectReference Include="..\..\src\Accommodations.Infra\Accommodations.Infra.csproj" />
   </ItemGroup>
 
   <ItemGroup>
