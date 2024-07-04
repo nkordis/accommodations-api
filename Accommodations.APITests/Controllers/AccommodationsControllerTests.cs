@@ -1,17 +1,26 @@
 ﻿using Xunit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using FluentAssertions;
-using FluentAssertions.Common;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Accommodations.APITests;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using Moq;
+using Accommodations.Domain.Repositories;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Accommodations.Domain.Entities;
+using Accommodations.App.Accommodations.Dtos;
+using System.Net.Http.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Accommodations.API.Controllers.Tests
 {
     public class AccommodationsControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _applicationFactory;
+        private readonly Mock<IAccommodationsRepository> _mockAccommodationsRepository = new();
 
         public AccommodationsControllerTests(WebApplicationFactory<Program> applicationFactory)
         {
@@ -20,8 +29,44 @@ namespace Accommodations.API.Controllers.Tests
                 builder.ConfigureTestServices(services =>
                 {
                     services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+                    services.Replace(ServiceDescriptor.Scoped(typeof(IAccommodationsRepository), 
+                        _ => _mockAccommodationsRepository.Object));
                 });
             });
+        }
+
+        [Fact()]
+        public async Task GetByGuid_ForExistingGuid_Returns200OK()
+        {
+            // Arrange
+            var client = _applicationFactory.CreateClient();
+            var guid = Guid.NewGuid();
+            var accommodation = new Accommodation()
+            {
+                Id = guid,
+                Name = "Test",
+                Description = "Test description",
+                Type = AccommodationType.Other,
+                HasInstantBooking = true,
+            };
+            _mockAccommodationsRepository.Setup(m => m.GetAsync(guid)).ReturnsAsync(accommodation);
+
+            // Act
+            var response = await client.GetAsync($"/api/accommodations/{guid}");
+            var jsonString = await response.Content.ReadAsStringAsync();
+            var settings = new JsonSerializerSettings
+            {
+                Converters = { new StringEnumConverter() },
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            var accommodationDto = JsonConvert.DeserializeObject<AccommodationDto>(jsonString, settings);
+
+            // Assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+            accommodationDto.Should().NotBeNull();
+            accommodationDto.Id.Should().Be(guid);
+            accommodationDto.Name.Should().Be("Test");
         }
 
         [Fact()]
@@ -30,6 +75,7 @@ namespace Accommodations.API.Controllers.Tests
             // Arrange
             var client = _applicationFactory.CreateClient();
             var guid = Guid.NewGuid();
+            _mockAccommodationsRepository.Setup(m => m.GetAsync(guid)).ReturnsAsync((Accommodation?)null);
 
             // Act
             var result = await client.GetAsync($"/api/accommodations/{guid}");
