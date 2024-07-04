@@ -1,6 +1,11 @@
 ﻿using Xunit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using FluentAssertions;
+using FluentAssertions.Common;
+using Microsoft.AspNetCore.Authorization.Policy;
+using Accommodations.APITests;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Accommodations.API.Controllers.Tests
 {
@@ -10,7 +15,27 @@ namespace Accommodations.API.Controllers.Tests
 
         public AccommodationsControllerTests(WebApplicationFactory<Program> applicationFactory)
         {
-            _applicationFactory = applicationFactory;
+            _applicationFactory = applicationFactory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+                });
+            });
+        }
+
+        [Fact()]
+        public async Task GetByGuid_ForNonExistingGuid_Returns404NotFound()
+        {
+            // Arrange
+            var client = _applicationFactory.CreateClient();
+            var guid = Guid.NewGuid();
+
+            // Act
+            var result = await client.GetAsync($"/api/accommodations/{guid}");
+
+            // Assert
+            result.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
         }
 
         [Fact()]
