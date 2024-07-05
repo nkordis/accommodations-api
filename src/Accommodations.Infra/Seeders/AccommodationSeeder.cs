@@ -57,10 +57,16 @@ namespace Accommodations.Infra.Seeders
 
         private IEnumerable<Accommodation> GetAccommodations()
         {
+            User owner = new User()
+            {
+                Email = "seed-user@test.com"
+            };
+
             return new List<Accommodation>
             {
                 new Accommodation
                 {
+                    Owner = owner,
                     Id = Guid.NewGuid(),
                     Name = "Sunny Apartments",
                     Description = "Modern apartments with stunning city views.",
@@ -97,6 +103,7 @@ namespace Accommodations.Infra.Seeders
                 },
                 new Accommodation
                 {
+                    Owner = owner,
                     Id = Guid.NewGuid(),
                     Name = "Cozy Cottage",
                     Description = "Charming cottage in a serene location.",
