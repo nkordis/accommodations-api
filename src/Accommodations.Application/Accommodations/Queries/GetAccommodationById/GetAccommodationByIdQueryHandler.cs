@@ -1,6 +1,7 @@
 ﻿using Accommodations.App.Accommodations.Dtos;
 using Accommodations.Domain.Entities;
 using Accommodations.Domain.Exceptions;
+using Accommodations.Domain.Interfaces;
 using Accommodations.Domain.Repositories;
 using AutoMapper;
 using MediatR;
@@ -9,7 +10,9 @@ using Microsoft.Extensions.Logging;
 namespace Accommodations.App.Accommodations.Queries.GetAccommodationById
 {
     public class GetAccommodationByIdQueryHandler(ILogger<GetAccommodationByIdQueryHandler> logger,
-        IMapper mapper, IAccommodationsRepository accommodationsRepository) : IRequestHandler<GetAccommodationByIdQuery, AccommodationDto>
+        IMapper mapper, 
+        IAccommodationsRepository accommodationsRepository,
+        IBlobStorageService blobStorageService) : IRequestHandler<GetAccommodationByIdQuery, AccommodationDto>
     {
         public async Task<AccommodationDto> Handle(GetAccommodationByIdQuery request, CancellationToken cancellationToken)
         {
@@ -20,6 +23,7 @@ namespace Accommodations.App.Accommodations.Queries.GetAccommodationById
 
             var accommodationdto = mapper.Map<AccommodationDto>(accommodation);
 
+            accommodationdto.ImageSasUrl = blobStorageService.GetBlobSasUrl(accommodation.ImageUrl);
 
             return accommodationdto;
         }

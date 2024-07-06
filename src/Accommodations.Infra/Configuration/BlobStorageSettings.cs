@@ -5,5 +5,6 @@ namespace Accommodations.Infra.Configuration
     {
         public string ConnectionString { get; set; } = default!;
         public string AccommodationsContainerName { get; set; } = default!;
+        public string AccountKey { get; set; } = default!;
     }
 }

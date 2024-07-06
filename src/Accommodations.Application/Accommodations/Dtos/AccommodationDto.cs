@@ -13,6 +13,9 @@ namespace Accommodations.App.Accommodations.Dtos
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? PostalCode { get; set; }
+        public string? ImageSasUrl { get; set; }
+
         public List<UnitDto> Units { get; set; } = [];
+        
     }
 }
