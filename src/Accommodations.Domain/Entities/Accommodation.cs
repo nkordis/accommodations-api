@@ -60,6 +60,11 @@ namespace Accommodations.Domain.Entities
         /// Gets or sets the Owner's Id of the accommodation
         /// </summary>
         public string OwnerId { get; set; } = default!;
+
+        /// <summary>
+        /// Gets or sets an image of the accommodation
+        /// </summary>
+        public string? ImageUrl { get; set; }
     }
 
     /// <summary>

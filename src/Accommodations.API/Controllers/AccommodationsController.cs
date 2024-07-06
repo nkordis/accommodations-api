@@ -1,6 +1,7 @@
 ﻿using Accommodations.App.Accommodations.Commands.CreateAccommodation;
 using Accommodations.App.Accommodations.Commands.DeleteAccommodation;
 using Accommodations.App.Accommodations.Commands.UpdateAccommodation;
+using Accommodations.App.Accommodations.Commands.UploadAccommodationImage;
 using Accommodations.App.Accommodations.Dtos;
 using Accommodations.App.Accommodations.Queries.GetAccommodationById;
 using Accommodations.App.Accommodations.Queries.GetAllAccommodations;
@@ -43,7 +44,7 @@ namespace Accommodations.API.Controllers
         [HttpPatch("{guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateAccommodation([FromRoute] Guid guid, 
+        public async Task<IActionResult> UpdateAccommodation([FromRoute] Guid guid,
             UpdateAccommodationCommand command)
         {
             command.Guid = guid;
@@ -58,7 +59,24 @@ namespace Accommodations.API.Controllers
         {
             Guid guid = await mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetByGuid), new {guid}, null);
+            return CreatedAtAction(nameof(GetByGuid), new { guid }, null);
+        }
+
+        [HttpPost("{guid}/image")]
+        public async Task<IActionResult> UploadImage([FromRoute]Guid guid, IFormFile file)
+        {
+            using var stream = file.OpenReadStream();
+
+            var command = new UploadAccommodationImageCommand()
+            {
+                Guid = guid,
+                FileName = file.FileName,
+                File = stream
+            };
+
+            await mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

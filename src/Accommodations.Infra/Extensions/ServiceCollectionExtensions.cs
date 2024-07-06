@@ -4,9 +4,11 @@ using Accommodations.Domain.Repositories;
 using Accommodations.Infra.Authorization;
 using Accommodations.Infra.Authorization.Requirements;
 using Accommodations.Infra.Authorization.Services;
+using Accommodations.Infra.Configuration;
 using Accommodations.Infra.Persistence;
 using Accommodations.Infra.Repositories;
 using Accommodations.Infra.Seeders;
+using Accommodations.Infra.Storage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +46,9 @@ namespace Accommodations.Infra.Extensions
             services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, CreateMultipleAccommodationRequirementHandler>();
             services.AddScoped<IAccommodationAuthorizationService, AccommodationAuthorizationService>();
+
+            services.Configure<BlobStorageSettings>(configuration.GetSection("BlobStorage"));
+            services.AddScoped<IBlobStorageService, BlobStorageService>();
         }
     }
 }
