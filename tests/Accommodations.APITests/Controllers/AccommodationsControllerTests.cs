@@ -10,10 +10,10 @@ using Accommodations.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Accommodations.Domain.Entities;
 using Accommodations.App.Accommodations.Dtos;
-using System.Net.Http.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Accommodations.Infra.Seeders;
 
 namespace Accommodations.API.Controllers.Tests
 {
@@ -21,7 +21,7 @@ namespace Accommodations.API.Controllers.Tests
     {
         private readonly WebApplicationFactory<Program> _applicationFactory;
         private readonly Mock<IAccommodationsRepository> _mockAccommodationsRepository = new();
-
+        private readonly Mock<IAccommodationSeeder> _mockAccommodationSeeder = new();
         public AccommodationsControllerTests(WebApplicationFactory<Program> applicationFactory)
         {
             _applicationFactory = applicationFactory.WithWebHostBuilder(builder =>
@@ -31,6 +31,8 @@ namespace Accommodations.API.Controllers.Tests
                     services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
                     services.Replace(ServiceDescriptor.Scoped(typeof(IAccommodationsRepository), 
                         _ => _mockAccommodationsRepository.Object));
+                    services.Replace(ServiceDescriptor.Scoped(typeof(IAccommodationSeeder),
+                        _ => _mockAccommodationSeeder.Object));
                 });
             });
         }
