@@ -70,7 +70,7 @@ namespace Accommodations.API.Controllers
             var command = new UploadAccommodationImageCommand()
             {
                 Guid = guid,
-                FileName = file.FileName,
+                FileName = $"{guid}-{file.FileName}",
                 File = stream
             };
 
