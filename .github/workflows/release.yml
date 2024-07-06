@@ -1,4 +1,4 @@
-name: restaurats-api-cd
+name: accommodations-api-cd
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name:  Build
-        run: dotnet build --no-restore
+        run: dotnet build --no-restore -c Release
       - name:  Publish
         run: dotnet publish ./src/Accommodations.API/Accommodations.API.csproj -o ${{env.DOTNET_ROOT}}/api --no-build
       - name: Upload a Build Artifact
