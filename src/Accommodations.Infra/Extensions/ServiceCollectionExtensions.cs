@@ -22,8 +22,13 @@ namespace Accommodations.Infra.Extensions
         public static void AddDbInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("AccommodationsDb");
-            services.AddDbContext<AccommodationsDbContext>(options => options.UseSqlServer(connectionString)
-            .EnableSensitiveDataLogging());
+            services.AddDbContext<AccommodationsDbContext>(options =>
+                options.UseSqlServer(connectionString, sqlOptions =>
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null))
+                .EnableSensitiveDataLogging());
 
             services.AddIdentityApiEndpoints<User>()
                 .AddRoles<IdentityRole>()
@@ -41,7 +46,7 @@ namespace Accommodations.Infra.Extensions
                     builder => builder.AddRequirements(new MinimumAgeRequirement(18)))
                 .AddPolicy(PolicyNames.CreatedAtLeast2Accommodations,
                     builder => builder.AddRequirements(new CreateMultipleAccommodationRequirement(2)));
-                 
+
 
             services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, CreateMultipleAccommodationRequirementHandler>();
